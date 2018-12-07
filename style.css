@@ -1,0 +1,23 @@
+body{
+    background-color:#e9ecef;
+    font-family: 'Exo 2', sans-serif;
+
+
+
+}
+.kek{
+    background-color: #e9ecef;
+}
+.ebat1{
+    background-color: white;
+    height:400px;
+}
+.ebat2{
+    background-color: white;   
+    height:400px;
+}
+
+.row > div {
+    padding-left: 7px;
+    padding-right: 7px;
+}
