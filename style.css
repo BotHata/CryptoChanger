@@ -27,3 +27,6 @@ body{
     width: 100% !important;
     display: block;
 }
+.card{
+    margin-top:20px;
+}
