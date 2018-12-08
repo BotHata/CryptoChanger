@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <link href="light.png" rel="shortcut icon" type="images/png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>Fast exchanger BTC-RUB</title>
 
   </head>
@@ -33,33 +33,36 @@
         <div class="row">
         <div class="col-sm-8">
             <div class="container justify-content-center ebat1">
-                <form style="width: 50%; min-width: 300px; padding: 20px; vertical-align: top;">
+                <form class="main-form">
                         <h4>Обменять BTC в RUB</h4>
+
                         <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Имя">
+                            <input type="text" name="name" class="form-control" placeholder="Имя">
                         </div>
                     
                         <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Ваш Email">
+                            <input type="text" name="mail" class="form-control" placeholder="Ваш Email">
                         </div>
-                        <h4>Вы хотите перевести:</h4>
+
+                        <h4>Вы хотите перевести</h4>
+
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Сумма в BTC">
-                            <label>* Необходимо для отслеживания перевода.</label>
-                            <label>Вы получите в рублях:<span class="ebatsya">xхх</span></label>
+                            <input type="text" name="count" class="form-control" placeholder="Сумма в BTC">
+                            <label><b>Вам будет переведено: <span class="ebatsya">0</span>₽ (с учётом комиссии <span class="ebis">0</span>₽)</b></label>
+                            <label>* Необходимо для отслеживания перевода, переводите точно указанную сумму.</label>
                         </div>
+
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Номер банковской карты">
-                            </div>
-                            <button type="button" class="btn btn-warning">Отправить</button>
+                            <input type="text" name="card" class="form-control" placeholder="Номер банковской карты">
+                        </div>
+
+                        <button type="button" class="btn btn-warning">Отправить</button>
                     </form>      
             </div>
             </div>
         <div class="col-sm-4">
-            <div class="container justify-content-center ebat2">
-            <form>
-                <h3>Отзывы</h3>
-            </form>
+            <div class="container justify-content-center ebat2" style="padding: 20px;">
+                <h4>Отзывы</h4>
             </div>
         </div>
 
@@ -100,5 +103,26 @@
             </div>
         </div>
     </footer>
-</body>
+
+    <script>
+        $('input[name="count"]').on('input keyup', function(el) {
+            var count = $(this).val();
+            count = count.replace(',', '.');
+            count *= 238000;
+            var com = 20 + count * 0.01;
+            
+            if (count >= com) {
+                count -= 20;
+            } else {
+                com = 0;
+            }
+
+            count = Math.round(count, 0);
+
+            $('.ebatsya').html(count);
+            $('.ebis').html(com);
+        });
+    </script>    
+
+  </body>
 </html>
