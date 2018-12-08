@@ -105,11 +105,25 @@
     </footer>
 
     <script>
+        var course = 238000;
+
+        const Http = new XMLHttpRequest();
+        const url = 'https://blockchain.info/ru/ticker';
+        Http.open("GET", url);
+        Http.send();
+        Http.onreadystatechange=(e)=>{
+            var res = Http.responseText;
+            if (res) {
+                course = JSON.parse(res).RUB.last;
+            }
+        }
+
         $('input[name="count"]').on('input keyup', function(el) {
             var count = $(this).val();
             count = count.replace(',', '.');
-            count *= 238000;
-            var com = 20 + count * 0.01;
+            count *= course;
+
+            var com = Math.round(20 + count * 0.01);
             
             if (count >= com) {
                 count -= 20;
