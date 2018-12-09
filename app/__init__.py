@@ -13,3 +13,4 @@ app.config.from_object('config')
 
 
 from app import index
+from app import rules
