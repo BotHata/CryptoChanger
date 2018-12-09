@@ -32,6 +32,7 @@
             <div class="container justify-content-center ebat1">
 	{% block cont %}{% endblock %}
 </div>
+{% if news %}
             <div class="container justify-content-center ebat1" style="margin-top: 15px;">
                 <form class="main-form">
                         <h4>Последние новости</h4>
@@ -43,6 +44,7 @@
                         <label>04.09.2018</label>
                     </form>      
             </div>
+{% endif %}
             </div>
         <div class="col-sm-4">
             <a name="reviews"></a>
@@ -90,12 +92,12 @@
                 <h4>Партнёры</h4>
                 <div class="card" style="width: 18rem; ">
                     <div class="card-body">
-                      <img src="/static/bestchange.gif"> <a style="margin-left: 10px;color:black" href="https://www.bestchange.ru/"> BestChange</a>
+                      <img src="/static/bestchange.gif"> <a style="margin-left: 10px;color:black" href="https://www.bestchange.ru/">BestChange</a>
                     </div>
                   </div>
                   <div class="card" style="width: 18rem; ">
                     <div class="card-body">
-                      <img src="/static/fincompas.png"><a style="margin-left:10px;color:black; " href="http://fincompass.info/"> FinCompass</a>
+                      <img src="/static/fincompas.png"><a style="margin-left:10px;color:black; " href="http://fincompass.info/">FinCompass</a>
                     </div>
                   </div>
             </div>

@@ -14,6 +14,7 @@ app.config.from_object('config')
 
 from app import index
 from app import rules
+from app import confirm
 
 from app import sys_change
 from app import sys_feedback

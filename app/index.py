@@ -7,4 +7,6 @@ def index():
 	return render_template('index.html',
 		LINK = LINK,
 		url = '',
+
+		news = True,
 	)

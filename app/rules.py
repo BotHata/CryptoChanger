@@ -8,4 +8,6 @@ def rules():
 	return render_template('sosaka.html',
 		LINK = LINK,
 		url = 'rules',
+
+		news = False,
 	)
