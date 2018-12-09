@@ -1,5 +1,5 @@
 from flask import render_template
-from app import app, LINK
+from app import app, LINK, get_reviews
 
 
 @app.route('/confirm')
@@ -10,4 +10,5 @@ def confirm():
 		url = 'confirm',
 
 		news = False,
+		reviews = get_reviews(),
 	)

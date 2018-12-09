@@ -50,27 +50,26 @@
             <a name="reviews"></a>
             <div class="container justify-content-center ebat2" style="padding: 20px;">
                 <h4>Отзывы</h4>
-                <div class="card" style="width: 18rem; ">
+{% for i in reviews %}
+                <div class="card">
                     <div class="card-body">
-                      <h5 class="card-title">Отзыв №28</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">александр</h6>
-                      <p class="card-text">можно было бы и побыстрее</p>
+                      <h5 class="card-title">Отзыв №{{ i.id }}</h5>
+                      <h6 class="card-subtitle mb-2 text-muted">{{ i.name }}</h6>
+                      <p class="card-text">{{ i.cont }}</p>
                     </div>
                   </div>
-                  <div class="card" style="width: 18rem; ">
-                    <div class="card-body">
-                      <h5 class="card-title">Отзыв №27</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">олололл</h6>
-                      <p class="card-text">Обменяли норм</p>
+{% endfor %}
+
+                <form action="/sys_reviews/" method="post">
+                    <h5 style="margin: 15px 0 10px 10px;">Оставить отзыв</h5>
+                    <div class="input-group mb-3">
+                        <input type="text" name="name" class="form-control" placeholder="Имя">
                     </div>
-                  </div>                
-                  <div class="card" style="width: 18rem; ">
-                    <div class="card-body">
-                      <h5 class="card-title">Отзыв №26</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">Имран</h6>
-                      <p class="card-text">Нашёл этот обменник, так как тут была самая низкая коммисия. Обменял, перевели не так уж быстро, всё заняло часа два.</p>
-                    </div>
-                  </div>
+                    <div class="form-group">
+                        <textarea name="cont" class="form-control" id="exampleFormControlTextarea1" placeholder="Ваше сообщение" rows="3"></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-info">Отправить</button>
+                </form>
             </div>
             
             <a name="help"></a>

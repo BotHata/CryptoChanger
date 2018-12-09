@@ -1,5 +1,5 @@
 from flask import render_template
-from app import app, LINK
+from app import app, LINK, get_reviews
 
 
 @app.route('/')
@@ -9,4 +9,5 @@ def index():
 		url = '',
 
 		news = True,
+		reviews = get_reviews(),
 	)

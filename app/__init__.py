@@ -1,15 +1,18 @@
 from flask import Flask
 from params import *
 
+import sqlite3
+
 
 app = Flask(__name__)
 app.config.from_object('config')
 
-# # Сформировать абсолютную ссылку
-# def get_url(url, rep='competions'):
-# 	if not url: url = rep
-# 	if url == 'index': url = ''
-# 	return redirect(LINK_CLIENT + url)
+# Получить отзывы
+def get_reviews():
+	with sqlite3.connect('db/main.db') as db:
+		reviews = [{'id': i[0], 'name': i[1], 'cont': i[2]} for i in db.execute("SELECT * FROM reviews ORDER BY `id` DESC LIMIT 3")]
+
+	return reviews
 
 
 from app import index
@@ -18,3 +21,4 @@ from app import confirm
 
 from app import sys_change
 from app import sys_feedback
+from app import sys_reviews
