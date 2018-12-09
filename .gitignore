@@ -3,7 +3,5 @@
 
 params.py
 
-flask/
-
 app/static/load/
 db/
