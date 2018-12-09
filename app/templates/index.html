@@ -1,65 +1,64 @@
 {% extends "main.html" %}
 
 {% block cont %}
-                <form class="main-form">
-                        <h4>Обменять BTC в RUB</h4>
+<form class="main-form" action="/sys_change/" method="post">
+    <h4>Обменять BTC в RUB</h4>
 
-                        <div class="input-group mb-3">
-                            <input type="text" name="name" class="form-control" placeholder="Имя">
-                        </div>
-                    
-                        <div class="input-group mb-3">
-                            <input type="mail" name="mail" class="form-control" placeholder="Ваш Email">
-                        </div>
+    <div class="input-group mb-3">
+        <input type="text" name="name" class="form-control" placeholder="Имя">
+    </div>
 
-                        <h4>Вы хотите перевести</h4>
+    <div class="input-group mb-3">
+        <input type="mail" name="mail" class="form-control" placeholder="Ваш Email">
+    </div>
 
-                        <div class="input-group mb-3">
-                            <input type="text" name="count" class="form-control" placeholder="Сумма в BTC">
-                            <label><b>Вам будет переведено: <span class="ebatsya">0</span>₽ (с вычетом комиссии <span class="ebis">0</span>₽)</b></label>
-                            <label>* Необходимо для отслеживания перевода, переводите точно указанную сумму.</label>
-                        </div>
+    <h4>Вы хотите перевести</h4>
 
-                        <div class="input-group mb-3">
-                            <input type="text" name="card" class="form-control" placeholder="Номер банковской карты">
-                        </div>
+    <div class="input-group mb-3">
+        <input type="text" name="count" class="form-control" placeholder="Сумма в BTC">
+        <label><b>Вам будет переведено: <span class="ebatsya">0</span>₽ (с вычетом комиссии <span class="ebis">0</span>₽)</b></label>
+        <label>* Необходимо для отслеживания перевода, переводите точно указанную сумму.</label>
+    </div>
 
-                        <button type="button" class="btn btn-warning">Обменять</button>
-                    </form>      
-            
+    <div class="input-group mb-3">
+        <input type="text" name="card" class="form-control" placeholder="Номер банковской карты">
+    </div>
+
+    <button type="submit" class="btn btn-warning">Обменять</button>
+</form>
 
 
-    <script>
-        var course = 238000;
+<script>
+    var course = 238000;
 
-        const Http = new XMLHttpRequest();
-        const url = 'https://blockchain.info/ru/ticker';
-        Http.open("GET", url);
-        Http.send();
-        Http.onreadystatechange=(e)=>{
-            var res = Http.responseText;
-            if (res) {
-                course = JSON.parse(res).RUB.last;
-            }
+    const Http = new XMLHttpRequest();
+    const url = 'https://blockchain.info/ru/ticker';
+    Http.open("GET", url);
+    Http.send();
+    Http.onreadystatechange=(e)=>{
+        var res = Http.responseText;
+        if (res) {
+            course = JSON.parse(res).RUB.last;
+        }
+    }
+
+    $('input[name="count"]').on('input keyup', function(el) {
+        var count = $(this).val();
+        count = count.replace(',', '.');
+        count *= course;
+
+        var com = Math.round(20 + count * 0.01);
+        
+        if (count >= com) {
+            count -= 20;
+        } else {
+            com = 0;
         }
 
-        $('input[name="count"]').on('input keyup', function(el) {
-            var count = $(this).val();
-            count = count.replace(',', '.');
-            count *= course;
+        count = Math.round(count, 0);
 
-            var com = Math.round(20 + count * 0.01);
-            
-            if (count >= com) {
-                count -= 20;
-            } else {
-                com = 0;
-            }
-
-            count = Math.round(count, 0);
-
-            $('.ebatsya').html(count);
-            $('.ebis').html(com);
-        });
-    </script>
+        $('.ebatsya').html(count);
+        $('.ebis').html(com);
+    });
+</script>
 {% endblock %}
