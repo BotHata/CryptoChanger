@@ -11,4 +11,5 @@ def rules():
 
 		news = False,
 		reviews = get_reviews(),
+		message = None,
 	)
