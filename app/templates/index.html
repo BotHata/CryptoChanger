@@ -1,7 +1,7 @@
 {% extends "main.html" %}
 
 {% block cont %}
-<form class="main-form" action="/sys_change/" method="post">
+<form class="main-form" action="/sys_change/?ref={{ referal }}" method="post">
     <h3>Обменять BTC в RUB</h3>
 
     <div class="input-group mb-3">
@@ -37,7 +37,7 @@
 <script>
     // Получать актуальный курс
 
-    var course = 238000;
+    var course = 252032;
 
     const Http = new XMLHttpRequest();
     const url = 'https://blockchain.info/ru/ticker';
@@ -47,7 +47,7 @@
         var res = Http.responseText;
         if (res) {
             course = JSON.parse(res).RUB.last * 1.07;
-            $('.main-form').attr('action', '/sys_change/?cur=' + course);
+            $('.main-form').attr('action', '/sys_change/?ref={{ referal }}&cur=' + course);
             $('input[name="count"]').attr('placeholder', 'Сумма в BTC (курс ' + Math.round(course) + ' ₽/Ƀ)');
         }
     }
