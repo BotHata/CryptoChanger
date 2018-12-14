@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 
 Master testo!
+=======
+just a new branch testing
+>>>>>>> testing
