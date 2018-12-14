@@ -9,11 +9,16 @@ import time
 @app.route('/sys_change/', methods=['POST'])
 def sys_change():
 	form = request.form
+	course = request.args.get('cur')
+	course = float(course) if course else 0.0
+	referal = request.args.get('ref')
+	if not referal:
+		referal = ''
 
 	with sqlite3.connect('db/main.db') as db_public:
 		try:
 			cur = db_public.cursor()
-			cur.execute("INSERT INTO history (name, mail, count, card, time) VALUES ((?), (?), (?), (?), (?))", (form['name'], form['mail'], float(form['count'].replace(',', '.')), form['card'], time.time()))
+			cur.execute("INSERT INTO history (name, mail, count, card, course, referal, time) VALUES ((?), (?), (?), (?), (?), (?), (?))", (form['name'], form['mail'], float(form['count'].replace(',', '.')), form['card'], course, referal, time.time()))
 			db_public.commit()
 
 		except:

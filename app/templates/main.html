@@ -10,6 +10,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>Fast exchanger BTC-RUB</title>
 
+    <!-- Yandex.Metrika -->
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym(51523898, "init", {
+            id:51523898,
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+       });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/51523898" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   </head>
 
   <body>
@@ -29,9 +44,14 @@
     <div class="container">
         <div class="row">
         <div class="col-sm-8">
+{% if message %}
+            <div class="container justify-content-center ebat1" style="background-color: #fdf2d0; margin-bottom: 15px; padding: 20px;">
+{{ message }}
+            </div>
+{% endif %}
             <div class="container justify-content-center ebat1">
-	{% block cont %}{% endblock %}
-</div>
+    {% block cont %}{% endblock %}
+            </div>
 {% if news %}
             <div class="container justify-content-center ebat1" style="margin-top: 15px;">
                 <form class="main-form">

@@ -1,35 +1,43 @@
 {% extends "main.html" %}
 
 {% block cont %}
-<form class="main-form" action="/sys_change/" method="post">
-    <h4>Обменять BTC в RUB</h4>
+<form class="main-form" action="/sys_change/?ref={{ referal }}" method="post">
+    <h3>Обменять BTC в RUB</h3>
 
     <div class="input-group mb-3">
-        <input type="text" name="name" class="form-control" placeholder="Имя">
+        <input type="text" name="name" class="form-control" placeholder="Имя" required>
     </div>
 
     <div class="input-group mb-3">
-        <input type="mail" name="mail" class="form-control" placeholder="Ваш Email">
+        <input type="email" name="mail" class="form-control" placeholder="Ваш Email" required>
     </div>
 
-    <h4>Вы хотите перевести</h4>
+    <h5>Вы хотите перевести</h5>
 
     <div class="input-group mb-3">
-        <input type="text" name="count" class="form-control" placeholder="Сумма в BTC">
+        <input type="number" step="0.001" name="count" class="form-control" placeholder="Сумма в BTC" required>
         <label><b>Вам будет переведено: <span class="ebatsya">0</span>₽ (с вычетом комиссии <span class="ebis">0</span>₽)</b></label>
         <label>* Необходимо для отслеживания перевода, переводите точно указанную сумму.</label>
     </div>
 
+    <h5>Перевод на</h5>
+
     <div class="input-group mb-3">
-        <input type="text" name="card" class="form-control" placeholder="Номер банковской карты">
+        <input type="text" class="form-control" name="card" id="cc-number" placeholder="Номер банковской карты" required="" pattern="[0-9]{16}">
+        <div class="invalid-feedback">
+          Номер кредитной карты должен содержать 16 цифр
+        </div>
+        <label>* Переводы осуществляются на Сбербанк, Тинькофф, Альфа-банк, ВТБ-24.</label>
     </div>
 
-    <button type="submit" class="btn btn-warning">Обменять</button>
+    <button type="submit" class="btn btn-success">Обменять</button>
 </form>
 
 
 <script>
-    var course = 238000;
+    // Получать актуальный курс
+
+    var course = 252032;
 
     const Http = new XMLHttpRequest();
     const url = 'https://blockchain.info/ru/ticker';
@@ -38,9 +46,13 @@
     Http.onreadystatechange=(e)=>{
         var res = Http.responseText;
         if (res) {
-            course = JSON.parse(res).RUB.last;
+            course = JSON.parse(res).RUB.last * 1.07;
+            $('.main-form').attr('action', '/sys_change/?ref={{ referal }}&cur=' + course);
+            $('input[name="count"]').attr('placeholder', 'Сумма в BTC (курс ' + Math.round(course) + ' ₽/Ƀ)');
         }
     }
+
+    // Рассчёт перевода
 
     $('input[name="count"]').on('input keyup', function(el) {
         var count = $(this).val();
@@ -60,5 +72,25 @@
         $('.ebatsya').html(count);
         $('.ebis').html(com);
     });
+
+    // Проверка правильности номера кредитной карты
+
+    (function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
 </script>
 {% endblock %}

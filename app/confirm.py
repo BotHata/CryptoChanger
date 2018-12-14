@@ -11,4 +11,5 @@ def confirm():
 
 		news = False,
 		reviews = get_reviews(),
+		message = None,
 	)
