@@ -14,6 +14,6 @@ def index():
 
 		news = True,
 		reviews = get_reviews(),
-		message = 'Перевод фиата в BTC временно недоступен!',
+		message = 'Перевод из RUB в BTC из-за большой нагрузки временно недоступен!',
 		referal = referal,
 	)
