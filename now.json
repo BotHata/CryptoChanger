@@ -1,10 +1,17 @@
 {
 	"version": 2,
-	"name": "barebone-serverless-api-zeit-now",
+	"name": "exchanger",
 	"builds": [
-		{ "src": "*.py", "use": "@liudonghua123/now-flask" , "config": { "maxLambdaSize": "30mb" } }
+		{"src": "**/*.py", "use": "@liudonghua123/now-flask", "config": {"maxLambdaSize": "30mb"}},
+		{"src": "static/*", "use": "@now/static"},
+		{"src": "db/*", "use": "@now/static"}
 	],
 	"routes": [
-		{ "src": "/.*", "dest": "/"}
+		{"src": "/db/re.db", "dest": "/db/re.db"},
+		{"src": "/static/bestchange.gif", "dest": "/static/bestchange.gif"},
+		{"src": "/static/fincompas.png", "dest": "/static/fincompas.png"},
+		{"src": "/static/fon.jpg", "dest": "/static/fon.jpg"},
+		{"src": "/static/light.png", "dest": "/static/light.png"},
+		{"src": "/.*", "dest": "/"}
 	]
 }
