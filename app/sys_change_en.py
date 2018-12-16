@@ -5,9 +5,9 @@ import sqlite3
 import time
 
 
-@app.route('/sys_change', methods=['POST'])
-@app.route('/sys_change/', methods=['POST'])
-def sys_change():
+@app.route('/sys_change_en', methods=['POST'])
+@app.route('/sys_change_en/', methods=['POST'])
+def sys_change_en():
 	form = request.form
 	course = request.args.get('cur')
 	course = float(course) if course else 0.0
@@ -24,9 +24,9 @@ def sys_change():
 		except:
 			db_public.rollback()
 			# db_public.close()
-			return render_template('message.html', cont='Ошибка!')
+			return render_template('message.html', cont='Error!')
 
 		else:
 			# db_public.close()
-			return redirect(LINK + 'confirm/')
+			return redirect(LINK + 'confirm_en/')
 		
