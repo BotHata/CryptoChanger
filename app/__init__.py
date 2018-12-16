@@ -18,7 +18,10 @@ def get_reviews():
 from app import index
 from app import rules
 from app import confirm
+from app import en
+from app import confirm_en
 
+from app import sys_change_en
 from app import sys_change
 from app import sys_feedback
 from app import sys_reviews

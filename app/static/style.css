@@ -2,6 +2,7 @@ body{
     background-color: #e9ecef;
     font-family: 'Exo 2', sans-serif;
     background-image: url(fon.jpg);
+    scroll-behavior: smooth;
 }
 
 .kek{

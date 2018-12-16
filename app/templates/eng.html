@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -31,13 +31,13 @@
     <div class="navbar navbar-expand-lg sticky-top">
         <div class="container d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm kek">
             <img width="40" height="40" src="/static/light.png">
-        <h2 class="my-0 mr-md-auto font-weight-normal" onclick="location.href='/'" style="cursor: pointer;">Fast eXchanger</h2>
+        <h2 class="my-0 mr-md-auto font-weight-normal" onclick="location.href='/en/'" style="cursor: pointer;">Fast eXchanger</h2>
         <nav class="my-2 my-md-0 mr-md-3 navbar-right">
-            <img src="/static/russia-flag-icon-16.png"><a class="p-2 text-dark" href="/"><small><strong>RUS</strong></small></a>
-            <img src="/static/united-kingd.png"><a class="p-2 text-muted" style="margin-right:25px;" href="/en/"><small>ENG</small></a>
-            <a class="p-2 text-dark" href="/">Обмен</a>
-            <a class="p-2 text-dark" href="#reviews">Отзывы</a>
-            <a class="p-2 text-dark" href="#help">Помощь</a>
+            <img src="/static/russia-flag-icon-16.png"><a class="p-2 text-muted" href="/"><small>RUS</small></a>
+            <img src="/static/united-kingd.png"><a class="p-2 text-dark" style="margin-right:25px;" href="/en/"><small><strong>ENG</strong></small></a>
+            <a class="p-2 text-dark" href="/en">Exchange</a>
+            <a class="p-2 text-dark" href="#reviews">Reviews</a>
+            <a class="p-2 text-dark" href="#help">Support</a>
         </nav>
         </div>
     </div>
@@ -57,12 +57,12 @@
 {% if news %}
             <div class="container justify-content-center ebat1" style="margin-top: 15px;">
                 <form class="main-form">
-                        <h4>Последние новости</h4>
+                        <h4>Last news:</h4>
                         <hr>
-                        <p>Наконец после долгого перерыва мы вернулись и снова работаем!</p>
+                        <p>Finally, after a long break we are working!</p>
                         <label>29.11.2018</label>
                         <hr>
-                        <p>Всю информацию про криптовалюты и состояние рынка Вы можете посмотреть на <a href="https://coinmarketcap.com">coinmarketcap.com</a></p>
+                        <p>All the information abour cryptocurrencies and market you can see on <a href="https://coinmarketcap.com">coinmarketcap.com</a></p>
                         <label>04.09.2018</label>
                     </form>      
             </div>
@@ -71,11 +71,11 @@
         <div class="col-sm-4">
             <a name="reviews"></a>
             <div class="container justify-content-center ebat2" style="padding: 20px;">
-                <h4>Отзывы</h4>
+                <h4>Last reviews</h4>
 {% for i in reviews %}
                 <div class="card">
                     <div class="card-body">
-                      <h5 class="card-title">Отзыв №{{ i.id }}</h5>
+                      <h5 class="card-title">Review №{{ i.id }}</h5>
                       <h6 class="card-subtitle mb-2 text-muted">{{ i.name }}</h6>
                       <p class="card-text">{{ i.cont }}</p>
                     </div>
@@ -83,34 +83,34 @@
 {% endfor %}
 
                 <form action="/sys_reviews/" method="post">
-                    <h5 style="margin: 15px 0 10px 10px;">Оставить отзыв</h5>
+                    <h5 style="margin: 15px 0 10px 10px;">Leave review</h5>
                     <div class="input-group mb-3">
-                        <input type="text" name="name" class="form-control" placeholder="Имя">
+                        <input type="text" name="name" class="form-control" placeholder="Name">
                     </div>
                     <div class="form-group">
-                        <textarea name="cont" class="form-control" id="exampleFormControlTextarea1" placeholder="Ваше сообщение" rows="3"></textarea>
+                        <textarea name="cont" class="form-control" id="exampleFormControlTextarea1" placeholder="Your message" rows="3"></textarea>
                       </div>
-                      <button type="submit" class="btn btn-info">Отправить</button>
+                      <button type="submit" class="btn btn-info">Send</button>
                 </form>
             </div>
             
             <a name="help"></a>
             <div class="container justify-content-center ebat2" style="padding: 20px; margin-top: 15px;">
                 <form action="/sys_feedback/" method="post">
-                    <h4>Техническая поддержка</h4>
+                    <h4>Techincal support</h4>
                     <div class="input-group mb-3">
-                        <input type="mail" name="mail" class="form-control" placeholder="Ваш Email">
+                        <input type="mail" name="mail" class="form-control" placeholder="Your Email">
                     </div>
                     <div class="form-group">
-                        <textarea name="cont" class="form-control" id="exampleFormControlTextarea1" placeholder="Ваше сообщение" rows="3"></textarea>
+                        <textarea name="cont" class="form-control" id="exampleFormControlTextarea1" placeholder="Your message" rows="3"></textarea>
                       </div>
-                      <button type="submit" class="btn btn-info">Отправить</button>
+                      <button type="submit" class="btn btn-info">Send</button>
                 </form>
             </div>
             
             <a name="partners"></a>
             <div class="container justify-content-center ebat2" style="padding: 20px;margin-top: 15px;">
-                <h4>Партнёры</h4>
+                <h4>Partners</h4>
                 <div class="card" style="width: 18rem; ">
                     <div class="card-body">
                       <img src="/static/bestchange.gif"> <a style="margin-left: 10px;color:black" href="https://www.bestchange.ru/">BestChange</a>
@@ -133,28 +133,28 @@
             <div class="row row-30">
                 <div class="col-md-4 col-xl-5">
                     <div class="pr-xl-4">
-                        <p>Обменный пункт электронных валют</p>
-                        <p>Все права защищены © 2017-2018</p>
+                        <p>Cryptocurrencies Exchange Center</p>
+                        <p>all rights are reserved © 2017-2018</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <h5>Время работы</h5>
+                    <h5>Working time</h5>
                     <dl class="contact-list">
-                        <dt>Будние дни</dt>
-                        <dd>Пн. — Пт. с 10:00 до 02:00.</dd>
+                        <dt>Weekdays</dt>
+                        <dd>Mond. — Fr. from 10:00 to 02:00.</dd>
                     </dl>
                     <dl class="contact-list">
-                        <dt>Выходные</dt>
-                        <dd>Сб. — Вск. Круглосуточно.</dd>
+                        <dt>Weekends</dt>
+                        <dd>Sat. — Sun. All day.</dd>
                     </dl>
                 </div>
                 <div class="col-md-4 col-xl-3">
-                    <h5>Ссылки</h5>
+                    <h5>References</h5>
                     <ul class="nav-list">
-                        <li><a href="/rules/">Правила сайта</a></li>
-                        <li><a href="#partners">Партнёры</a></li>
-                        <li><a href="#help">Жалобы и предложения</a></li>
-                        <li><a href="#reviews">Отзывы</a></li>
+                        <li><a href="/rules/">Rules</a></li>
+                        <li><a href="#partners">Partners</a></li>
+                        <li><a href="#help">Support</a></li>
+                        <li><a href="#reviews">Reviews</a></li>
                     </ul>
                 </div>
             </div>
