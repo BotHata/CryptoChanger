@@ -1,5 +1,5 @@
 from flask import render_template, request
-from app import app, LINK, get_reviews
+from app import app, get_reviews
 
 
 @app.route('/')
@@ -9,11 +9,10 @@ def index():
 		referal = ''
 
 	return render_template('index.html',
-		LINK = LINK,
 		url = '',
 
 		news = True,
 		reviews = get_reviews(),
-		message = 'Перевод фиата в BTC временно недоступен!',
+		message = 'Перевод из RUB в BTC из-за большой нагрузки временно недоступен!',
 		referal = referal,
 	)

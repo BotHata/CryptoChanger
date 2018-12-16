@@ -1,5 +1,5 @@
 from flask import request, render_template, redirect
-from app import app, LINK
+from app import app
 
 import sqlite3
 import time
@@ -23,4 +23,4 @@ def sys_reviews():
 
 		else:
 			# db_public.close()
-			return redirect(LINK)
+			return redirect('/')

@@ -1,5 +1,4 @@
 from flask import Flask
-from params import *
 
 import sqlite3
 
