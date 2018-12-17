@@ -26,7 +26,7 @@ def add_history(req):
 	if type(req['count']) not in (int, float):
 		raise Exception('Неправильно заполнено поле "count"')
 
-	if type(req['card']) != int or len(str(req['card'])) != 16:
+	if len(str(req['card'])) != 16:
 		raise Exception('Неправильно заполнено поле "card"')
 
 	req['time'] = time.time()
