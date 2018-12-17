@@ -3,10 +3,35 @@ from pymongo import MongoClient
 
 import time
 import json
+import re
 
 
 app = Flask(__name__)
-db = MongoClient('mongodb://root:asdrqwerty09@invo-shard-00-00-guyjh.mongodb.net:27017,invo-shard-00-01-guyjh.mongodb.net:27017,invo-shard-00-02-guyjh.mongodb.net:27017/INVO?ssl=true&replicaSet=INVO-shard-0&authSource=admin')['exchanger']
+
+def connect():
+	return MongoClient('mongodb://root:asdrqwerty09@invo-shard-00-00-guyjh.mongodb.net:27017,invo-shard-00-01-guyjh.mongodb.net:27017,invo-shard-00-02-guyjh.mongodb.net:27017/INVO?ssl=true&replicaSet=INVO-shard-0&authSource=admin')
+db = connect()['exchanger']
+
+def add_history(req):
+	if len({'name', 'mail', 'count', 'card'} & set(req)) != 4:
+		raise Exception('Не все поля заполнены!')
+
+	if type(req['name']) != str:
+		raise Exception('Неправильно заполненно поле "name"')
+
+	temp = re.compile(r'\S+@\S+\.\S+')
+	if type(req['mail']) != str or temp.match(req['mail']) == None:
+		raise Exception('Неправильно заполнено поле "mail"')
+
+	if type(req['count']) not in (int, float):
+		raise Exception('Неправильно заполнено поле "count"')
+
+	if type(req['card']) != int or len(str(req['card'])) != 16:
+		raise Exception('Неправильно заполнено поле "card"')
+
+	req['time'] = time.time()
+
+	db['history'].insert_one(req)
 
 # Получить отзывы
 
@@ -69,10 +94,9 @@ def sys_change():
 		'card': request.args.get('card'),
 		'course': course,
 		'referal': referal,
-		'time': time.time(),
 	}
 
-	db['history'].insert_one(req)
+	add_history(req)
 
 	return '<script>document.location.href = "/confirm/"</script>'
 
