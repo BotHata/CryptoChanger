@@ -1,19 +1,17 @@
 from flask import Flask, render_template, request
-# from pymongo import MongoClient
+from pymongo import MongoClient
 
-# import sqlite3
 import time
 import json
 
 
 app = Flask(__name__)
+db = MongoClient('mongodb://root:asdrqwerty09@invo-shard-00-00-guyjh.mongodb.net:27017,invo-shard-00-01-guyjh.mongodb.net:27017,invo-shard-00-02-guyjh.mongodb.net:27017/INVO?ssl=true&replicaSet=INVO-shard-0&authSource=admin')['exchanger']
 
-# # Получить отзывы
-# def get_reviews():
-# 	with sqlite3.connect('db/main.db') as db:
-# 		reviews = [{'id': i[0], 'name': i[1], 'cont': i[2]} for i in db.execute("SELECT * FROM reviews ORDER BY `id` DESC LIMIT 3")]
+# Получить отзывы
 
-# 	return reviews
+def get_reviews():
+	return [i for i in db['reviews'].find({}, {'_id': False, 'time': False})][-3:][::-1]
 
 
 @app.route('/')
@@ -26,7 +24,7 @@ def index():
 		url = '',
 
 		news = True,
-		reviews = [], # get_reviews(),
+		reviews = get_reviews(),
 		message = 'Перевод из RUB в BTC из-за большой нагрузки временно недоступен!',
 		referal = referal,
 	)
@@ -38,7 +36,7 @@ def rules():
 		url = 'rules',
 
 		news = False,
-		reviews = [], # get_reviews(),
+		reviews = get_reviews(),
 		message = None,
 	)
 
@@ -49,37 +47,32 @@ def confirm():
 		url = 'confirm',
 
 		news = False,
-		reviews = [], # get_reviews(),
+		reviews = get_reviews(),
 		message = None,
 	)
 
 
-@app.route('/sys_change', methods=['POST'])
-@app.route('/sys_change/', methods=['POST'])
+@app.route('/sys_change')
+@app.route('/sys_change/')
 def sys_change():
-	# form = request.form
-	# course = request.args.get('cur')
-	# course = float(course) if course else 0.0
-	# referal = request.args.get('ref')
-	# if not referal:
-	# 	referal = ''
+	course = request.args.get('cur')
+	course = float(course) if course else 0.0
 
-	# cur = db_public.cursor()
-	# cur.execute("INSERT INTO history (name, mail, count, card, course, referal, time) VALUES ((?), (?), (?), (?), (?), (?), (?))", (form['name'], form['mail'], float(form['count'].replace(',', '.')), form['card'], course, referal, time.time()))
-	# db_public.commit()
+	referal = request.args.get('ref')
+	if not referal:
+		referal = ''
 
-	# req = {
-	# 	'name': form['name'],
-	# 	'mail': form['mail'],
-	# 	'count': float(form['count'].replace(',', '.')),
-	# 	'card': form['card'],
-	# 	'course': course,
-	# 	'referal': referal,
-	# 	'time': time.time(),
-	# }
+	req = {
+		'name': request.args.get('name'),
+		'mail': request.args.get('mail'),
+		'count': float(request.args.get('count').replace(',', '.')),
+		'card': request.args.get('card'),
+		'course': course,
+		'referal': referal,
+		'time': time.time(),
+	}
 
-	# with open('db/re.db', 'a') as file:
-	# 	print(json.dumps(req), file=file)
+	db['history'].insert_one(req)
 
 	return '<script>document.location.href = "/confirm/"</script>'
 

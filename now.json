@@ -7,11 +7,8 @@
 		{"src": "db/*", "use": "@now/static"}
 	],
 	"routes": [
-		{"src": "/db/re.db", "dest": "/db/re.db"},
-		{"src": "/static/bestchange.gif", "dest": "/static/bestchange.gif"},
-		{"src": "/static/fincompas.png", "dest": "/static/fincompas.png"},
-		{"src": "/static/fon.jpg", "dest": "/static/fon.jpg"},
-		{"src": "/static/light.png", "dest": "/static/light.png"},
+		{"src": "/db/(.*)", "dest": "/db/$1"},
+		{"src": "/static/(.*)", "dest": "/static/$1"},
 		{"src": "/.*", "dest": "/"}
 	]
 }
