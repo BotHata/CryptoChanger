@@ -33,6 +33,25 @@ def add_history(req):
 
 	db['history'].insert_one(req)
 
+def add_reviews(req):
+	if len({'name', 'cont'} & set(req)) != 2:
+		raise Exception('Не все поля заполнены!')
+
+	if type(req['name']) != str:
+		raise Exception('Неправильно заполненно поле "name"')
+
+	if type(req['cont']) != str:
+		raise Exception('Неправильно заполненно поле "cont"')
+
+	req['time'] = time.time()
+
+	try:
+		req['id'] = db['reviews'].find().sort('id', -1)[0]['id'] + 1
+	except:
+		req['id'] = 1
+
+	db['reviews'].insert_one(req)
+
 # Получить отзывы
 
 def get_reviews():
@@ -76,7 +95,6 @@ def confirm():
 		message = None,
 	)
 
-
 @app.route('/sys_change')
 @app.route('/sys_change/')
 def sys_change():
@@ -99,6 +117,18 @@ def sys_change():
 	add_history(req)
 
 	return '<script>document.location.href = "/confirm/"</script>'
+
+@app.route('/sys_reviews')
+@app.route('/sys_reviews/')
+def sys_reviews():
+	req = {
+		'name': request.args.get('name'),
+		'cont': request.args.get('cont'),
+	}
+
+	add_reviews(req)
+
+	return '<script>document.location.href = "/"</script>'
 
 
 if __name__ == '__main__':

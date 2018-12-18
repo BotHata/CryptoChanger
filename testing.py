@@ -1,6 +1,6 @@
 import unittest
 
-from index import MongoClient, connect, get_reviews, add_history
+from index import MongoClient, connect, get_reviews, add_history, add_reviews
 
 
 class TestCase(unittest.TestCase):
@@ -42,7 +42,7 @@ class TestCase(unittest.TestCase):
 			data = {
 				'name': 'Имя',
 				'mail': 'polozhev@.ru',
-				'count': 0.024,
+				'count': 0.48,
 				'card': 1234123412341234,
 				'course': 226378,
 				'referal': 'referal',
@@ -52,7 +52,7 @@ class TestCase(unittest.TestCase):
 			data = {
 				'name': 'Имя',
 				'mail': 'polozhev@a.ru',
-				'count': 0.024,
+				'count': 0.552,
 			}
 			add_history(data)
 
@@ -63,6 +63,20 @@ class TestCase(unittest.TestCase):
 				'card': 1234123412341234,
 			}
 			add_history(data)
+
+	def test_add_review(self):
+		with self.assertRaises(Exception):
+			data = {
+				'name': 123,
+				'cont': 'Комментарий',
+			}
+			add_reviews(data)
+
+			data = {
+				'name': 'Alex',
+				'comt': 'Комментарий',
+			}
+			add_reviews(data)
 
 
 
