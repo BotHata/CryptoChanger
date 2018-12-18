@@ -130,6 +130,11 @@ def sys_reviews():
 
 	return '<script>document.location.href = "/"</script>'
 
+@app.route('/testing')
+@app.route('/testing/')
+def testing():
+	return render_template('testing.html')
+
 
 if __name__ == '__main__':
 	app.run(debug=True)

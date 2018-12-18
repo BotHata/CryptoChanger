@@ -41,6 +41,7 @@
 <div id="testing"></div>
 
 
+<script src="/static/check.js"></script>
 <script>
     // Получать актуальный курс
 
@@ -84,10 +85,10 @@
 
         function check_card() {
             var card = $('input[name="card"]').val();
-            if (card.length != 16 || isNaN(card)) {
-                $('#change').css('display', 'none');
-            } else {
+            if (check(card)) {
                 $('#change').css('display', 'inline-block');
+            } else {
+                $('#change').css('display', 'none');
             }
         }
 
