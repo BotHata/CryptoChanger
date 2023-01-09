@@ -3,6 +3,6 @@
 
 params.py
 
-flask/
+env/
 
 # db/
